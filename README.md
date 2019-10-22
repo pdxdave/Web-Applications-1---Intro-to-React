@@ -78,3 +78,74 @@ const App = () => {
  } 
  export default App
  ```
+
+Another example
+```
+import React, {useState} from 'react';
+import './App.css';
+import './styles.css'
+
+const App = () => {
+
+  const[color, setColor] = useState('Red');
+
+  const styles = {
+    color: "E62739"
+  }
+  
+  const handleSetColor = (color) => {
+    setColor(color);
+  }
+
+  if (color === "Green") {
+    styles.color = "#57e278";
+  } else if (color === "Pink") {
+    styles.color = "#e257c1";
+  } else if (color === "Blue") {
+    styles.color = "#2e6cd3";
+  } else if (color === "Orange") {
+    styles.color = "#FFA500";
+  } else {
+    // red
+    styles.color = "#E62739";
+  }
+
+  return (
+    <div className="counter">
+      <p>
+        {`color: `}
+        <span className="picker-choice">
+          {color}
+        </span>
+      </p>
+      <div className="button_container">
+        <button className="color_button" onClick={() => {handleSetColor('Blue')}}>
+          <span role="img" aria-lable="blue heart">
+              💙
+          </span>
+        </button>
+        <button className="color_button" onClick={() => {handleSetColor('Green')}}>
+          <span role="img" aria-lable="green heart">
+              💚 
+          </span>
+        </button>
+        <button className="color_button" onClick={() => {handleSetColor('Red')}}>
+          <span role="img" aria-lable="red heart">
+              💗
+          </span>
+        </button>
+        <button className="color_button">
+          <span role="img" aria-lable="pink heart">
+              💗
+          </span>
+        </button>
+
+      </div>
+    </div>
+  )
+  export default App;
+}
+```
+
+
+
