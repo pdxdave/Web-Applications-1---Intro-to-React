@@ -31,3 +31,22 @@ function App() {
 
 export default App;
 ```
+Another exmaple
+```
+import React, {useState} from 'react';
+import './App.css';
+
+const App = () => {
+
+  const[catOn, setCatOn] = useState(false)
+
+  return(
+    <div onClick={() => {setCatOn(!catOn)}}>
+        <p>{catOn === false ? "Joe" : "frank"}</p>
+    </div>
+  )
+}
+
+export default App;
+
+```
