@@ -12,3 +12,22 @@ React is a UI component library
 
 * We use JSX to write React components. It's sort of a templating style language to write markup and Javascript
 
+Simple use of Hooks
+```
+import React, {useState} from 'react';
+import './App.css';
+
+function App() {
+  const [isBulbOn, setIsBulbOn] = useState(false)
+  setTimeout(() => {
+    setIsBulbOn(!isBulbOn)
+  }, 1000)
+  return (
+    <div className="App">
+      The lightbulb is {isBulbOn ? 'On' : 'Off'}
+    </div>
+  );
+}
+
+export default App;
+```
