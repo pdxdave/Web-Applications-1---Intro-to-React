@@ -150,4 +150,38 @@ const App = () => {
 
 ### Component Side Effects  -  Third part of Intro to React
 
+#### Side Effects definition: 
+It is a general concept about behaviours of functions. A function is said to have side effect if it trys to modify anything outside its body. For example, if it modidifies a global variable, then it is a side effect. If it makes a network call, it is a side effect as well.
 
+Example
+```
+function App() {
+
+  const[count, setCount] = useState(0)
+  const[isHappy, setIsHappy] = useState(false)
+
+
+
+  // This is used when the elements outputed have changed since the previous run of the
+  // App function.  As soon as the page repaints, the useEffect is executed
+
+  useEffect(() => {
+    console.log('you see me every time React finishes with the DOM')
+  });
+
+  return(
+    <div>
+      <h1>Count: {count}</h1>
+      {
+        isHappy 
+          ? <h3>So Happy!</h3>
+          : <h3> Not happy at all...</h3>
+      }
+      <button onClick={(e) => setCount(count + 1)}>Increment Count</button>
+      <button onClick={(e) => setIsHappy(true)}>Make Happy</button>
+      <button onClick={(e) => setIsHappy(false)}>Make Unappy</button>
+    </div>
+  )
+}
+export default App;
+```
