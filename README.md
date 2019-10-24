@@ -50,7 +50,8 @@ const App = () => {
 export default App;
 
 ```
-Another exmaple
+### Composing React components and passing Data Via Props  -  Second part of Intro to React
+Exmaple
 
 ```
 import React, {useState} from 'react';
@@ -147,5 +148,6 @@ const App = () => {
 }
 ```
 
+### Component Side Effects  -  Third part of Intro to React
 
 
