@@ -185,3 +185,47 @@ function App() {
 }
 export default App;
 ```
+#### Syncing Effects to changes in state and props
+
+```
+function User(props){
+  const[color, setColor] = useState("red");
+
+  useEffect(() => {
+    console.log('first render and all subsequent renders')
+  })
+  // This will only run once at the first paint.
+  useEffect(() => {
+    console.log('first render')
+  }, [])
+  // This will run if color, in the array, is changed.
+  // color is grabbed from the useState
+  useEffect(() => {
+    console.log('first render color')
+  }, [color])
+
+
+  return(
+    <div style={{color, border: `4px solid ${color}`, padding: "8px"}}>
+      <div>User id is {props.id}</div>
+      <div>User is dressed in {color}</div>
+      <button onClick={e => setColor("red")}>Red</button>
+      <button onClick={e => setColor("green")}>Green</button>
+    </div>
+  )
+}
+
+function App() {
+  const[number, setNumber] = useState(4)
+
+
+  return(
+    <div>
+      {number < 4 && <User id={number}/>}
+      <button onClick={e => setNumber(number + 1)}>Increment</button>
+      <button onClick={e => setNumber(1)}>Reset</button>
+
+    </div>
+  )
+}
+```
