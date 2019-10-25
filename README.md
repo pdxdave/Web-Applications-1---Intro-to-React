@@ -229,6 +229,7 @@ function App() {
   )
 }
 ```
+#### Guided Project 1
 Another example.  This is a movie list app.  It consists of three parts: App.js, MovieList, and MovieCard.  It uses Axios along with useEffect.  The API is called through useEffect with Axios inside of that.  This is from a guided project. 
 
 App.js
@@ -326,4 +327,91 @@ const MovieCard = (props) => {
 
 export default MovieCard;
 
+```
+
+#### Guided Project 2
+This is a dog image board.  It has three components: App.js, PetGrid.js and PetCard.js
+
+App.js
+```
+import React from 'react'
+import './style.css'
+import PetGrid from './components/PetGrid'
+
+
+function App() {
+  return(
+    <div className="App">
+        <PetGrid />
+  </div>
+  )
+}
+
+export default App;
+```
+
+PetGrid.js
+```
+import React, {useState, useEffect} from 'react';
+import axios from 'axios'
+import PetCard from './PetCard'
+
+
+
+const PetGrid = () => {
+
+    const[petData, setPetData] = useState([]);
+    const[breed, setBreed] = useState("mix");
+
+    useEffect(() => {
+        axios.get(`https://dog.ceo/api/breed/${breed}/images/random/15`)
+        .then(res => {
+            console.log(res.data.message)
+            setPetData(res.data.message)
+          
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [breed]) // watching for the breed state to change
+
+    return (
+        <div className="container">
+            <button onClick={() => setBreed("labrador")}>Labrador</button> {/* changing breed here */}
+            <button onClick={() => setBreed("rottweiler")}>Rottweiler</button>
+            <div className="entry">
+                {petData.map((item, index) => {
+                    return (
+                        <PetCard 
+                            key={index}
+                            breed={breed}
+                            imgUrl={item}
+                        />
+                    )
+                })}
+            </div>
+        </div>
+    )
+}
+
+export default PetGrid
+```
+
+PetCard.js
+```
+import React from 'react';
+
+
+const PetCard = (props) => {
+    return (
+        <div className="dog-card" key={props.id}>
+            <img className="dog-image" alt="randomDog" src={props.imgUrl} />
+            
+            
+            <h2>{props.breed}</h2> 
+        </div>
+    )
+}
+
+export default PetCard;
 ```
