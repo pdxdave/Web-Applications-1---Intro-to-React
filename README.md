@@ -229,3 +229,101 @@ function App() {
   )
 }
 ```
+Another example.  This is a movie list app.  It consists of three parts: App.js, MovieList, and MovieCard.  It uses Axios along with useEffect.  The API is called through useEffect with Axios inside of that.  This is from a guided project. 
+
+App.js
+```
+import React from 'react'
+import './App.css';
+import MovieList from './components/MoveList'
+import './style.css'
+
+
+function App() {
+  return(
+    <div className="App">
+    <div className="logo_container">
+      <h1>API</h1>
+    </div>
+    <MovieList />
+  </div>
+  )
+}
+
+export default App;
+```
+
+
+MovieList.js
+```
+import React, {useState, useEffect} from 'react';
+import axios from 'axios'
+import MovieCard from './MovieCard';
+
+const MovieList = () => {
+
+    // setting the reponse to the API in an array
+    const[films, setFilms] = useState([])
+
+    useEffect(() => {
+        axios.get(`https://ghibliapi.herokuapp.com/films`)
+        .then(response => {
+            console.log(response.data)
+            setFilms(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }, []) // [] empty dependency array. useEffect will only run once if empty. 
+           // otherwise could be infinite loop. this is a second argument
+
+    return(
+        <div className="film">
+            {films.map(film => {
+                return (
+                    <MovieCard  key={film.id}
+                                title={film.title}
+                                description={film.description}
+                                release={film.release_date}
+                                director={film.director}
+                        />
+                )
+            })}
+            
+        </div>
+    )
+}
+
+export default MovieList;
+
+// Notes
+/*
+    Dependency Array: It is a second parameter used inside useEffect
+    Helps stop the API from reaching its limit. Prevents repeated calls
+
+*/
+
+```
+
+MovieCard.js
+```
+import React from 'react';
+
+const MovieCard = (props) => {
+    return(
+        <div className="film-list"
+            key="{props.film.id}">
+                <h2>Film title: {props.title}</h2>
+                <p>Description: {props.description}</p>
+                <div className="bottom">
+                    <p>Director: {props.director}</p>
+                    <p>Release date: {props.release_date}</p>
+                </div>
+                
+        </div>
+    )
+}
+
+export default MovieCard;
+
+```
